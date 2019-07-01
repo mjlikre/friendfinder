@@ -9,10 +9,11 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <!-- <script src="main.js"></script> -->
+
 </head>
 <body>
     <h1>survey</h1>
@@ -134,11 +135,29 @@
                     <option value = '5'>5 (YESS)</option>
             </select>
         </div>
-        <div class = 'popup'>
-            <button type= 'submit' class = 'btn btn-primary' id = 'submit'>Submit</button>
-
-
-        </div>
+    
+        <button type="button submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id = 'submit'>
+            Submit
+          </button>
+          
+     
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Friends who matched with you!!!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" id = 'newDiv'>
+                    <h3 id = 'matchedFriend'></h3>
+                   
+                </div>
+               
+              </div>
+            </div>
+          </div>
     </form>
 
 
@@ -167,6 +186,7 @@
                 var checker = 0; 
                 var matched=[];
                 const scores = newFriend.scores;
+                var friendIndex;
                 for(var i = 0; i < scores.length; i ++){
                     if(newFriend.name === ''){
                         checker ++;
@@ -195,14 +215,19 @@
                             
                             matched[i] = matching;
                         }
+                        console.log(matched)
+                        console.log(typeof matched[1]);
+                        console.log(matched[1]);
+                        friendIndex = matched.indexOf(Math.max(...matched));
+                        
+                        console.log(friendIndex);
+                        posting();
+
+                        $('#matchedFriend').text(data[friendIndex].name);
+                        $('#newDiv').append(`<img src = '${data[friendIndex].photo}'/>`)
                     })
                    
-                    console.log(matched)
-                    console.log(typeof matched[1]);
-                    var friendIndex = matched.indexOf(Math.max(matched));
                     
-                    console.log(friendIndex);
-                    posting();
 
                 }
                 else{
