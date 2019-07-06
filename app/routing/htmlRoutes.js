@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var APP = express();
+var app = express();
 
 module.exports = function(app){
 
